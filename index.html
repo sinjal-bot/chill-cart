@@ -842,7 +842,9 @@ function addItem() {
   }
 };
 
-  var rzp = new Razorpay(options);
+// 🔥 THIS PART IS VERY IMPORTANT
+var rzp = new Razorpay(options);
+rzp.open();
   
   // Handle payment failure
   rzp.on('payment.failed', function () {
