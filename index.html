@@ -824,28 +824,23 @@ function addItem() {
   submitBtn.textContent = "Opening payment...";
 
   // 🔥 OPEN RAZORPAY BEFORE PLACING ORDER
-  var options = {
-    key: "rzp_test_1DP5mmOlF5G0m1",
-    amount: 2000,
-    currency: "INR",
-    name: "Chill Cart",
-    description: "Delivery Charge",
+ var options = {
+  key: "rzp_test_1DP5mmOlF5G0m1",
+  amount: 2000,
+  currency: "INR",
+  name: "Chill Cart",
+  description: "Delivery Charge",
 
-    handler: function (response) {
-      // ✅ CAPTURE PAYMENT ID FOR TRACKING
-      const paymentId = response.razorpay_payment_id;
-      processOrder(name, contact, room, hostel, items, paymentId);
-    },
+  prefill: {
+    name: "Test User",
+    email: "test@example.com",
+    contact: "9876543210"
+  },
 
-    prefill: {
-      name: name,
-      contact: contact
-    },
-
-    theme: {
-      color: "#7dde9a"
-    }
-  };
+  handler: function (response) {
+    alert("Payment Successful ✅");
+  }
+};
 
   var rzp = new Razorpay(options);
   
