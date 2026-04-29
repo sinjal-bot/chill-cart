@@ -832,14 +832,12 @@ var options = {
   description: "Delivery Charge",
 
   prefill: {
-    name: "Test User",
-    email: "test@example.com",
-    contact: "9876543210"
+    name: name,
+    contact: contact
   },
 
   handler: function (response) {
-  processOrder(name, contact, room, hostel, items, response.razorpay_payment_id);
-}
+    processOrder(name, contact, room, hostel, items, response.razorpay_payment_id);
   }
 };
 
