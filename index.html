@@ -824,7 +824,7 @@ function addItem() {
   submitBtn.textContent = "Opening payment...";
 
   // 🔥 OPEN RAZORPAY BEFORE PLACING ORDER
- var options = {
+var options = {
   key: "rzp_test_1DP5mmOlF5G0m1",
   amount: 2000,
   currency: "INR",
@@ -842,26 +842,20 @@ function addItem() {
   }
 };
 
-// 🔥 THIS PART IS VERY IMPORTANT
 var rzp = new Razorpay(options);
-rzp.open();
-  
-  // Handle payment failure
-  rzp.on('payment.failed', function () {
-    submitBtn.disabled = false;
-    submitBtn.textContent = "🚀 Place My Order";
-    showToast('❌ Payment failed. Please try again.', 'error');
-  });
+rzp.open(); // ✅ ONLY ONE TIME
 
-  // Handle payment cancellation
-  rzp.on('payment.cancel', function () {
-    submitBtn.disabled = false;
-    submitBtn.textContent = "🚀 Place My Order";
-    showToast('⚠️ Payment cancelled', 'error');
-  });
+rzp.on('payment.failed', function () {
+  submitBtn.disabled = false;
+  submitBtn.textContent = "🚀 Place My Order";
+  showToast('❌ Payment failed. Please try again.', 'error');
+});
 
-  rzp.open();
-}
+rzp.on('payment.cancel', function () {
+  submitBtn.disabled = false;
+  submitBtn.textContent = "🚀 Place My Order";
+  showToast('⚠️ Payment cancelled', 'error');
+});
 
 function processOrder(name, contact, room, hostel, items, paymentId) {
   const submitBtn = document.getElementById('submit-btn');
