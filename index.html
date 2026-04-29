@@ -838,7 +838,8 @@ var options = {
   },
 
   handler: function (response) {
-    alert("Payment Successful ✅");
+  processOrder(name, contact, room, hostel, items, response.razorpay_payment_id);
+}
   }
 };
 
@@ -856,6 +857,7 @@ rzp.on('payment.cancel', function () {
   submitBtn.textContent = "🚀 Place My Order";
   showToast('⚠️ Payment cancelled', 'error');
 });
+}
 
 function processOrder(name, contact, room, hostel, items, paymentId) {
   const submitBtn = document.getElementById('submit-btn');
